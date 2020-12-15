@@ -1,4 +1,4 @@
-package com.addressBook.dto;
+package com.addressBookApp.dto;
 
 public class ResponseDTO {
 	private String message;

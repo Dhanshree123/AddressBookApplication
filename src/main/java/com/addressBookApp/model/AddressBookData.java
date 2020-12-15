@@ -1,6 +1,6 @@
-package com.addressBook.model;
+package com.addressBookApp.model;
 
-import com.addressBook.dto.AddressBookDTO;
+import com.addressBookApp.dto.AddressBookDTO;
 
 public class AddressBookData {
 	int id;
