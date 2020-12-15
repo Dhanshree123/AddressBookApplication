@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/addressbook")
 public class AddressBookController {
 	
+	//Controller class
 	@RequestMapping(value = {"","/","/get"})
 	public ResponseEntity<String> getAddressBookData(){
 		return  new ResponseEntity<String>("Get Call Success", HttpStatus.OK);
