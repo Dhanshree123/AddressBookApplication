@@ -25,8 +25,7 @@ public class AddressBookService implements IAddressBookService{
 
 	@Override
 	public AddressBookData createAddressBookData(AddressBookDTO addressBookDTO) {
-		AddressBookData contactData = null;
-		contactData = new AddressBookData(contactList.size()+1,addressBookDTO);
+		AddressBookData contactData = new AddressBookData(contactList.size()+1,addressBookDTO);
 		contactList.add(contactData);
 		return contactData;
 	}

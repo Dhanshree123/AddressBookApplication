@@ -2,6 +2,8 @@ package com.addressBookApp.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,34 +28,30 @@ public class AddressBookController {
 	@Autowired
 	private IAddressBookService addressBookService;
 	
-	@RequestMapping(value = {"","/","/get"})
+	@GetMapping(value = {"","/","/get"})
 	public ResponseEntity<ResponseDTO> getAddressBookData(){
-		List<AddressBookData> contactList = null;
-		contactList = addressBookService.getAddressBookData();
+		List<AddressBookData> contactList = addressBookService.getAddressBookData();
 		ResponseDTO respDTO = new ResponseDTO("Get Call Successful", contactList);
 		return new ResponseEntity<ResponseDTO>(respDTO, HttpStatus.OK);
 	}
 
 	@GetMapping("/get/{id}")
 	public ResponseEntity<ResponseDTO> getAddressBookDataForID(@PathVariable("id") int id){
-		AddressBookData contactData = null;
-		contactData = addressBookService.getAddressBookDataById(id);
+		AddressBookData contactData = addressBookService.getAddressBookDataById(id);
 		ResponseDTO respDTO = new ResponseDTO("Get Call For Id "+id+"Successful", contactData);
 		return new ResponseEntity<ResponseDTO>(respDTO, HttpStatus.OK);	
 	}
 
 	@PostMapping("/create")
-	public ResponseEntity<ResponseDTO> createAddressBookData(@RequestBody AddressBookDTO addressBookDTO){
-		AddressBookData contactData = null;
-		contactData = addressBookService.createAddressBookData(addressBookDTO);
+	public ResponseEntity<ResponseDTO> createAddressBookData(@Valid @RequestBody AddressBookDTO addressBookDTO){
+		AddressBookData contactData = addressBookService.createAddressBookData(addressBookDTO);
 		ResponseDTO respDTO = new ResponseDTO("Created AddressBook Data Successfully", contactData);
 		return new ResponseEntity<ResponseDTO>(respDTO, HttpStatus.OK);	
 	}
 
 	@PutMapping("/update/{id}")
-	public ResponseEntity<ResponseDTO> updateAddressBookData(@PathVariable("id") int id, @RequestBody AddressBookDTO addressBookDTO){
-		AddressBookData contactData = null;
-		contactData = addressBookService.updateAddressBookData(id,addressBookDTO);
+	public ResponseEntity<ResponseDTO> updateAddressBookData(@PathVariable("id") int id, @Valid @RequestBody AddressBookDTO addressBookDTO){
+		AddressBookData contactData = addressBookService.updateAddressBookData(id,addressBookDTO);
 		ResponseDTO respDTO = new ResponseDTO("Updated AddressBook Data Successfully", contactData);
 		return new ResponseEntity<ResponseDTO>(respDTO, HttpStatus.OK);
 	}
