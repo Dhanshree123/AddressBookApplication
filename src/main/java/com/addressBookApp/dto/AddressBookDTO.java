@@ -1,6 +1,8 @@
 package com.addressBookApp.dto;
 
-public class AddressBookDTO {
+import lombok.ToString;
+
+public @ToString class AddressBookDTO {
 	public String firstName;
 	public String lastName;
 	public String address;
@@ -13,9 +15,10 @@ public class AddressBookDTO {
 
 	public AddressBookDTO(){
 		
-	}
+	}/*
 	@Override
 	public String toString() {
 		return "AddressBookDTO [firstName=" + firstName + ", lastName=" + lastName + ", Address=" + address + "]";
 	}
+	*/
 }
