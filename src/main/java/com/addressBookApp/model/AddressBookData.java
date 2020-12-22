@@ -10,8 +10,8 @@ public @Data class AddressBookData {
 	String address;
 	String city;
 	String state;
-	int zip;
-	long phoneNumber;
+	String zip;
+	String phoneNumber;
 	
 	public AddressBookData(int id, AddressBookDTO addressBookDTO) {
 		this.id = id;
