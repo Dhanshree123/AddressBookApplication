@@ -2,41 +2,29 @@ package com.addressBookApp.model;
 
 import com.addressBookApp.dto.AddressBookDTO;
 
-public class AddressBookData {
-	int id;
-	String firstName;
-	String lastName;
-	String address;
+import lombok.Data;
 
+public @Data class AddressBookData {
+	int id;
+	String fullName;
+	String address;
+	String city;
+	String state;
+	int zip;
+	long phoneNumber;
+	
 	public AddressBookData(int id, AddressBookDTO addressBookDTO) {
 		this.id = id;
-		this.firstName = addressBookDTO.firstName;
-		this.lastName = addressBookDTO.lastName;
-		this.address = addressBookDTO.address;
+		this.updateAddressBookData(addressBookDTO);
 	}
 
-	public int getId() {
-		return id;
+	private void updateAddressBookData(AddressBookDTO addressBookDTO) {
+		this.fullName = addressBookDTO.fullName;
+		this.address = addressBookDTO.address;
+		this.city = addressBookDTO.city;
+		this.state=addressBookDTO.state;
+		this.zip = addressBookDTO.zip;
+		this.phoneNumber=addressBookDTO.phoneNumber;
 	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getFirstName() {
-		return firstName;
-	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-	public String getLastName() {
-		return lastName;
-	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
+
 }
