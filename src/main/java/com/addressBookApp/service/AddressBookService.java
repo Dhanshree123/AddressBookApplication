@@ -19,26 +19,22 @@ public class AddressBookService implements IAddressBookService{
 	
 	@Autowired
 	private AddressBookRepository addressbookRepository;
-
-	private List<AddressBookData> contactList = new ArrayList<>();
 	
 	@Override
 	public List<AddressBookData> getAddressBookData() {
-		return contactList;
+		return addressbookRepository.findAll();
 	}
 
 	@Override
 	public AddressBookData getAddressBookDataById(int id) {
-		return contactList.stream()
-				   .filter(contactData -> contactData.getId() == id)
-				   .findFirst()
+		return addressbookRepository
+				   .findById(id)
 				   .orElseThrow(() -> new AddressBookException("Contact Not Found"));
 	}
 
 	@Override
 	public AddressBookData createAddressBookData(AddressBookDTO addressBookDTO) {
 		AddressBookData contactData = new AddressBookData(addressBookDTO);
-		contactList.add(contactData);
 		log.debug("Contact Data: "+contactData);
 		return addressbookRepository.save(contactData);
 	}
@@ -46,18 +42,13 @@ public class AddressBookService implements IAddressBookService{
 	@Override
 	public AddressBookData updateAddressBookData(int id,AddressBookDTO addressBookDTO) {
 		AddressBookData contactData = this.getAddressBookDataById(id);
-		contactData.setFullName(addressBookDTO.fullName);
-		contactData.setAddress(addressBookDTO.address);
-		contactData.setCity(addressBookDTO.city);
-		contactData.setState(addressBookDTO.state);
-		contactData.setZip(addressBookDTO.zip);
-		contactData.setPhoneNumber(addressBookDTO.phoneNumber);
-		contactList.set(id-1,contactData);
-		return contactData;
+		contactData.updateAddressBookData(addressBookDTO);
+		return addressbookRepository.save(contactData);
 	}
 	
 	@Override
 	public void deleteAddressBookData(int id) {
-		contactList.remove(id-1);
+		AddressBookData contactData = this.getAddressBookDataById(id);
+		addressbookRepository.delete(contactData);
 	}
 }
