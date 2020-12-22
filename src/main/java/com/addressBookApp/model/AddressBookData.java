@@ -1,11 +1,25 @@
 package com.addressBookApp.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import com.addressBookApp.dto.AddressBookDTO;
 
 import lombok.Data;
 
+@Entity
+@Table(name="addressBook_contacts")
 public @Data class AddressBookData {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="contact_id")
 	int id;
+	
 	String fullName;
 	String address;
 	String city;
@@ -13,8 +27,11 @@ public @Data class AddressBookData {
 	String zip;
 	String phoneNumber;
 	
-	public AddressBookData(int id, AddressBookDTO addressBookDTO) {
-		this.id = id;
+	public AddressBookData() {
+
+	}
+	
+	public AddressBookData(AddressBookDTO addressBookDTO) {
 		this.updateAddressBookData(addressBookDTO);
 	}
 
